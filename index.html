@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>APEX GP — Arcade Moto Grand Prix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="game"></canvas>
+
+  <div id="hud" class="hidden">
+    <div class="panel" data-panel="1">
+      <div class="pos"><b>8</b><span>/8</span></div>
+      <div class="lap">LAP <b>1</b><em>/3</em></div>
+      <div class="timing">
+        <div class="tcur">0:00.00</div>
+        <div class="tbest">BEST --:--.--</div>
+      </div>
+      <div class="speedo">
+        <b>0</b><span>km/h</span>
+        <div class="boostbar"><i></i></div>
+      </div>
+      <canvas class="minimap" width="180" height="180"></canvas>
+      <div class="pname">P1</div>
+    </div>
+    <div class="panel" data-panel="2">
+      <div class="pos"><b>8</b><span>/8</span></div>
+      <div class="lap">LAP <b>1</b><em>/3</em></div>
+      <div class="timing">
+        <div class="tcur">0:00.00</div>
+        <div class="tbest">BEST --:--.--</div>
+      </div>
+      <div class="speedo">
+        <b>0</b><span>km/h</span>
+        <div class="boostbar"><i></i></div>
+      </div>
+      <canvas class="minimap" width="180" height="180"></canvas>
+      <div class="pname">P2</div>
+    </div>
+  </div>
+
+  <div id="vignette"></div>
+  <div id="countdown" class="hidden"></div>
+  <div id="toast"></div>
+
+  <div id="menu" class="screen">
+    <div class="menu-inner">
+      <div class="brand">
+        <div class="logo">APEX<span>GP</span></div>
+        <p class="tag">Grand Prix Moto Racing · Web Edition</p>
+      </div>
+
+      <div class="modes">
+        <button id="btn-solo" class="mode-btn"><span class="ico">1P</span> SOLO RACE</button>
+        <button id="btn-duo" class="mode-btn accent"><span class="ico">2P</span> SPLIT SCREEN</button>
+      </div>
+
+      <div class="config">
+        <div class="cfg-group">
+          <label>Circuit</label>
+          <div id="track-select" class="tracks"></div>
+        </div>
+        <div class="cfg-row">
+          <div class="cfg-group">
+            <label>Difficulty</label>
+            <div id="diff-select" class="seg">
+              <button data-diff="rookie">Rookie</button>
+              <button data-diff="pro" class="on">Pro</button>
+              <button data-diff="legend">Legend</button>
+            </div>
+          </div>
+          <div class="cfg-group">
+            <label>Laps</label>
+            <div id="laps-select" class="seg">
+              <button data-laps="1">1</button>
+              <button data-laps="2">2</button>
+              <button data-laps="3" class="on">3</button>
+              <button data-laps="5">5</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls-hint">
+        <div><b>Player 1</b> WASD · <kbd>Shift</kbd> Nitro</div>
+        <div><b>Player 2</b> Arrows · <kbd>R-Shift</kbd> Nitro</div>
+        <div class="muted"><kbd>P</kbd> Pause · <kbd>C</kbd> Camera · <kbd>M</kbd> Mute · <kbd>R</kbd> Restart</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="pause" class="screen hidden">
+    <div class="menu-inner small">
+      <h1>PAUSED</h1>
+      <div class="modes">
+        <button id="btn-resume" class="mode-btn">RESUME</button>
+        <button id="btn-restart" class="mode-btn">RESTART RACE</button>
+        <button id="btn-quit" class="mode-btn ghost">MAIN MENU</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="results" class="screen hidden">
+    <div class="menu-inner">
+      <h1 id="results-title">RACE COMPLETE</h1>
+      <div class="results-grid">
+        <div class="standings">
+          <div class="standings-head"><span>#</span><span>RIDER</span><span>LAPS</span><span>BEST LAP</span><span>TOTAL</span></div>
+          <div id="standings-body"></div>
+        </div>
+        <div class="results-side">
+          <div class="podium" id="podium"></div>
+          <div class="modes">
+            <button id="btn-again" class="mode-btn accent">RACE AGAIN</button>
+            <button id="btn-menu" class="mode-btn ghost">MAIN MENU</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
